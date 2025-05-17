@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskFlow - CRUD App</title>
+  <script src="https://cdn.tailwindcss.com "></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter :wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .animate-fade-in {
+      @apply transform translate-y-0 opacity-100;
+    }
+    .animate-fade-out {
+      @apply transform translate-y-4 opacity-0;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">📝 TaskFlow</h1>
+      <button id="theme-toggle" class="px-3 py-1 rounded bg-gray-200 dark:bg-gray-700">Toggle Theme</button>
+    </div>
+
+    <!-- Filters and Sort -->
+    <div class="flex flex-wrap gap-4 mb-6">
+      <div>
+        <label class="block mb-1 font-semibold">Filter</label>
+        <select id="filter-select" class="border rounded px-3 py-1 dark:bg-gray-700 dark:border-gray-600">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Sort By</label>
+        <select id="sort-select" class="border rounded px-3 py-1 dark:bg-gray-700 dark:border-gray-600">
+          <option value="default">Default</option>
+          <option value="dueDateAsc">Due Date (Oldest)</option>
+          <option value="dueDateDesc">Due Date (Newest)</option>
+        </select>
+      </div>
+
+      <button id="export-btn" class="self-end bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded transition mt-6 md:mt-0">Export CSV</button>
+    </div>
+
+    <!-- Form -->
+    <form id="task-form" class="bg-white dark:bg-gray-800 shadow p-6 rounded mb-6">
+      <input type="hidden" id="task-id">
+      <div class="mb-4">
+        <label class="block mb-1 font-semibold">Title</label>
+        <input type="text" id="title" required class="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600">
+      </div>
+      <div class="mb-4">
+        <label class="block mb-1 font-semibold">Description</label>
+        <textarea id="description" rows="3" class="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600"></textarea>
+      </div>
+      <div class="mb-4 grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-1 font-semibold">Category</label>
+          <select id="category" class="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600">
+            <option value="General">General</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+          </select>
+        </div>
+        <div>
+          <label class="block mb-1 font-semibold">Due Date</label>
+          <input type="date" id="dueDate" class="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:border-gray-600">
+        </div>
+      </div>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">Add Task</button>
+    </form>
+
+    <!-- Task List -->
+    <div id="task-list" class="space-y-4"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-4 right-4 hidden bg-green-500 text-white px-4 py-2 rounded shadow-lg transition transform translate-y-0 opacity-100 duration-300">
+    Task saved!
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
